@@ -110,7 +110,7 @@ http://localhost:3000
 
 ---
 
-## Project Structure (Planned)
+## Project Structure
 
 ```
 src/
@@ -139,6 +139,20 @@ src/
 * [ ] @ToDo Search tasks
 * [ ] @ToDo State management using Redux
 * [ ] @ToDo Data caching using React Query
+
+---
+
+## Color System
+
+The application uses a clean, minimal color palette inspired by modern Kanban dashboards.
+
+These colors are implemented using Tailwind CSS utility classes and aligned with the UI design.
+
+Base Colors:
+
+| Purpose | Tailwind Class | Description |
+| :--- | :--- | :--- |
+| **App Background** | `bg-gray-100` | Main page background |
 
 ---
 

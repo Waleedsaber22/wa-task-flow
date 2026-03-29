@@ -1,70 +1,149 @@
-# Getting Started with Create React App
+# Task Flow
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern Kanban-style ToDo dashboard built with React, Redux, React Query, Tailwind CSS, and Material UI.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Overview
 
-### `npm start`
+Task Flow is a task management application that helps users organize their work across four stages:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+* Backlog
+* In Progress
+* Review
+* Done
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The application provides a clean and interactive Kanban board with drag-and-drop functionality, task management, and optimized performance using caching.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack
 
-### `npm run build`
+### Core
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* React
+* Redux Toolkit (State Management)
+* React Query (Data Fetching & Caching)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### UI / Styling
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Tailwind CSS (Utility-first styling)
+* Material UI (Component library)
 
-### `npm run eject`
+### Additional [Drag Functionality]
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+* DnD Kit (Drag & Drop)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Project Setup
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 1. Create the project
 
-## Learn More
+```bash
+npx create-react-app task_flow
+cd task_flow
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 2. Install dependencies
 
-### Code Splitting
+#### Core dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm install @reduxjs/toolkit react-redux
+npm install @tanstack/react-query
+```
 
-### Analyzing the Bundle Size
+#### UI & Styling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```bash
+npm install @mui/material @emotion/react @emotion/styled
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+```
 
-### Making a Progressive Web App
+#### Drag & Drop
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+npm install @dnd-kit/core @dnd-kit/sortable
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### 3. Setup Tailwind CSS
 
-### Deployment
+Update `tailwind.config.js`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+```js
+module.exports = {
+  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
 
-### `npm run build` fails to minify
+Update `src/index.css`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+---
+
+### 4. Run the project
+
+```bash
+npm start
+```
+
+App will run on:
+
+```
+http://localhost:3000
+```
+
+---
+
+## Project Structure (Planned)
+
+```
+src/
+│
+├── app/                # Redux store setup
+├── components/         # Reusable UI components
+├── features/           # Feature-based modules (tasks, columns)
+├── services/           # React Query logic / API layer
+├── hooks/              # Custom hooks
+├── layouts/            # Layout components (Kanban board)
+├── pages/              # Main views
+├── utils/              # Helper functions
+└── App.js
+```
+
+---
+
+## Features
+
+* [ ] @ToDo Display tasks in 4 columns
+* [ ] @ToDo Create task
+* [ ] @ToDo Edit task
+* [ ] @ToDo Delete task
+* [ ] @ToDo Drag & drop between columns
+* [ ] @ToDo Pagination / infinite scroll
+* [ ] @ToDo Search tasks
+* [ ] @ToDo State management using Redux
+* [ ] @ToDo Data caching using React Query
+
+---
+
+## Project Management
+
+Tasks and progress are managed using Trello:
+
+👉 https://trello.com/invite/b/69c97a3f53219a4d0b3731cd/ATTI9366e883613b0a1ebc9678510426d0feC305D5A6/task-flow

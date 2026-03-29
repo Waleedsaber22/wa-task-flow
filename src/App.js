@@ -1,19 +1,11 @@
-import './App.css';
+import AppLayout from "./layouts/AppLayout";
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <div className="App bg-gray-700">
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppLayout>
+      <Home />
+    </AppLayout>
   );
 }
 

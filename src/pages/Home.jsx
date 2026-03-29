@@ -1,3 +1,5 @@
+import Board from "../components/Board";
+
 export default function Home() {
-  return <div>Kanban Board Coming Soon...</div>;
+  return <div><Board /></div>;
 }

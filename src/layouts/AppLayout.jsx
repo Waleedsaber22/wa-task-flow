@@ -2,9 +2,9 @@ import { TextField } from "@mui/material";
 
 export default function AppLayout({ children }) {
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100/80">
       
-      {/* 🔹 Header */}
+      {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b">
         
         {/* Left: Title */}
@@ -28,7 +28,7 @@ export default function AppLayout({ children }) {
 
       </header>
 
-      {/* 🔹 Main Content */}
+      {/* Main Content */}
       <main className="p-6">{children}</main>
     </div>
   );

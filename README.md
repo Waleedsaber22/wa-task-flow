@@ -117,6 +117,7 @@ src/
 │
 ├── app/                # Redux store setup
 ├── components/         # Reusable UI components
+├── constants/          # App-wide constants (IMPORTANT)
 ├── features/           # Feature-based modules (tasks, columns)
 ├── services/           # React Query logic / API layer
 ├── hooks/              # Custom hooks
@@ -152,7 +153,8 @@ Base Colors:
 
 | Purpose | Tailwind Class | Description |
 | :--- | :--- | :--- |
-| **App Background** | `bg-gray-100` | Main page background |
+| **App Background** | `bg-gray-100/80` | Main page background |
+| **Column Background** | `bg-[#ebf0f0]` | Column in Board background |
 
 ---
 

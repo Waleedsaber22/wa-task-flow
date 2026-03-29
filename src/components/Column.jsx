@@ -1,29 +1,54 @@
+import { Box, Typography, Button } from "@mui/material";
 import TaskCard from "./TaskCard";
 
 export default function Column({ column }) {
   return (
-    <div className="bg-[#ebf0f0] rounded-lg p-4 flex flex-col h-[calc(100vh-120px)] min-w-[350px] max-w-[350px] grow">
-      
+    <Box
+      className="flex flex-col min-w-[350px] max-w-[350px] h-[calc(100vh-120px)]"
+      sx={{
+        backgroundColor: "#ebf0f0",
+        borderRadius: 2,
+        p: 2,
+      }}
+    >
       {/* Header */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className={`w-2 h-2 rounded-full ${column.color}`} />
-        <h2 className="text-sm font-bold tracking-wide">
+      <Box className="flex items-center gap-2 mb-4">
+        <Box
+          sx={{
+            width: 8,
+            height: 8,
+            borderRadius: "50%",
+          }}
+          className={column.color}
+        />
+
+        <Typography variant="subtitle2" fontWeight="bold">
           {column.title}
-        </h2>
-        <span className="text-xs w-6 h-6 flex justify-center items-center bg-gray-200 rounded-full text-gray-700">0</span>
-      </div>
+        </Typography>
+
+        <Box className="w-6 h-6 flex items-center justify-center bg-gray-200 rounded-full">
+          <Typography variant="caption">0</Typography>
+        </Box>
+      </Box>
 
       {/* Tasks */}
-      <div className="flex flex-col gap-3 overflow-y-auto">
-        {/* Static demo tasks */}
+      <Box className="flex flex-col gap-3 overflow-y-auto">
         <TaskCard />
         <TaskCard />
-      </div>
+      </Box>
 
       {/* Add Task */}
-      <button className="mt-4 border border-dashed border-gray-400 rounded-md py-2 text-sm text-gray-500 hover:bg-gray-300">
+      <Button
+        variant="outlined"
+        sx={{
+          mt: 2,
+          borderStyle: "dashed",
+          textTransform: "none",
+        }}
+        className="!text-gray-700 !border-gray-300"
+      >
         + Add task
-      </button>
-    </div>
+      </Button>
+    </Box>
   );
 }

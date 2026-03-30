@@ -6,15 +6,32 @@ import TaskDialog from "./TaskDialog";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { openEditDialog } from "../features/ui/uiSlice";
 import { useDispatch } from "react-redux";
+import { useDraggable } from "@dnd-kit/core";
 
 export default function TaskCard({ task }) {
+  const { attributes, listeners, setNodeRef, transform } =
+  useDraggable({
+    id: task.id,
+    data: task, // important
+  });
+
+  const style = transform
+  ? {
+      transform: `translate(${transform.x}px, ${transform.y}px)`,
+    }
+  : undefined;
+
   const dispatch = useDispatch();
 
   const priority = PRIORITIES[task.priority];
   const { mutate: deleteTask } = useDeleteTask();
 
   return (
-    <Card variant="outlined" sx={{
+    <Card 
+        ref={setNodeRef}
+        {...listeners}
+        {...attributes}
+        variant="outlined" sx={{
           borderRadius: 2,
           cursor: "pointer",
           position: "relative",
@@ -23,6 +40,7 @@ export default function TaskCard({ task }) {
           },
         }}
         onClick={() => dispatch(openEditDialog(task))}
+        onMouseDown={(e) => e.stopPropagation()}
         >
       <CardContent>
          <Box className="flex justify-between items-start">

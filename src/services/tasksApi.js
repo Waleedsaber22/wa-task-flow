@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const TASKS_API_URL = "http://localhost:4000/tasks";
+const TASKS_API_URL =
+  process.env.REACT_APP_TASKS_API_URL || "http://localhost:4000/tasks";
 
 export const fetchTasks = async ({ pageParam = 1, column }) => {
   const { data } = await axios.get(

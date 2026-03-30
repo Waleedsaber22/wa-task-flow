@@ -1,15 +1,51 @@
-import { Card, CardContent, Typography, Chip } from "@mui/material";
+import { Card, CardContent, Typography, Chip, IconButton, Box } from "@mui/material";
 import { PRIORITIES } from "../constants/priorities";
+import { useDeleteTask } from "../services/tasksQueries";
+import { useState } from "react";
+import TaskDialog from "./TaskDialog";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { openEditDialog } from "../features/ui/uiSlice";
+import { useDispatch } from "react-redux";
 
 export default function TaskCard({ task }) {
+  const dispatch = useDispatch();
+
   const priority = PRIORITIES[task.priority];
+  const { mutate: deleteTask } = useDeleteTask();
 
   return (
-    <Card variant="outlined" sx={{ borderRadius: 2 }}>
+    <Card variant="outlined" sx={{
+          borderRadius: 2,
+          cursor: "pointer",
+          position: "relative",
+          "&:hover .delete-btn": {
+            opacity: 1,
+          },
+        }}
+        onClick={() => dispatch(openEditDialog(task))}
+        >
       <CardContent>
-        <Typography variant="subtitle2" fontWeight={600} gutterBottom>
-          {task.title}
-        </Typography>
+         <Box className="flex justify-between items-start">
+            <Typography variant="subtitle2" fontWeight={600} gutterBottom>
+              {task.title}
+            </Typography>
+
+            {/* Delete button (hidden by default) */}
+            <IconButton
+              className="delete-btn"
+              size="small"
+              onClick={(e) => {
+                e.stopPropagation(); // prevent opening edit
+                deleteTask(task.id);
+              }}
+              sx={{
+                opacity: 0,
+                transition: "0.2s",
+              }}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          </Box>
 
         <Typography className="block" variant="caption" color="text.secondary">
           {task.description}

@@ -1,13 +1,13 @@
 import { Box, Typography, Button } from "@mui/material";
 import TaskCard from "./TaskCard";
 import { useTasks } from "../services/tasksQueries";
-import AddTaskDialog from "./AddTaskDialog";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { openCreateDialog } from "../features/ui/uiSlice";
 
 export default function Column({ column }) {
   const { data: tasks = [] } = useTasks();
   const filteredTasks = tasks.filter((t) => t.column === column.key);
-  const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   return (
     <Box
@@ -53,17 +53,12 @@ export default function Column({ column }) {
           borderStyle: "dashed",
           textTransform: "none",
         }}
-        onClick={() => setOpen(true)}
+        onClick={() => dispatch(openCreateDialog(column.key))}
         className="!text-gray-700 !border-gray-300"
       >
         + Add task
       </Button>
 
-       <AddTaskDialog
-        open={open}
-        onClose={() => setOpen(false)}
-        column={column.key}
-      />
     </Box>
   );
 }

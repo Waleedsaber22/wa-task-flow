@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -9,34 +9,62 @@ import {
   MenuItem,
 } from "@mui/material";
 import { PRIORITIES } from "../constants/priorities";
-import { useAddTask } from "../services/tasksQueries";
+import { useAddTask, useUpdateTask } from "../services/tasksQueries";
+import { useDispatch, useSelector } from "react-redux";
+import { closeTaskDialog } from "../features/ui/uiSlice";
  
-export default function AddTaskDialog({ open, onClose, column }) {
+export default function TaskDialog() {
+  const dispatch = useDispatch();
+  const { isTaskDialogOpen, task, column } = useSelector(
+    (state) => state.ui
+  );
+
+  const isEdit = Boolean(task);
+  
   const { mutate: addTask } = useAddTask();
+  const { mutate: updateTask } = useUpdateTask();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
 
+    useEffect(() => {
+    if (task) {
+      setTitle(task.title);
+      setDescription(task.description);
+      setPriority(task.priority);
+    } else {
+      setTitle("");
+      setDescription("");
+      setPriority("medium");
+    }
+  }, [task, isTaskDialogOpen]);
+
   const handleSubmit = () => {
     if (!title.trim()) return;
 
-    addTask(
-      {
+    if (isEdit) {
+      updateTask({
+        ...task,
         title,
         description,
-        column,
         priority,
-      }
-    );
+      });
+    } else {
+      addTask({
+          title,
+          description,
+          column,
+          priority,
+        }
+      );
+    }
 
-    setTitle("");
-    setDescription("");
-    onClose();
+    dispatch(closeTaskDialog());
   };
 
   return (
-    <Dialog open={open} onClose={onClose} fullWidth>
+    <Dialog open={isTaskDialogOpen} onClose={() => dispatch(closeTaskDialog())} fullWidth>
       <DialogTitle>Add Task</DialogTitle>
 
       <DialogContent>
@@ -75,9 +103,9 @@ export default function AddTaskDialog({ open, onClose, column }) {
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={() => dispatch(closeTaskDialog())}>Cancel</Button>
         <Button onClick={handleSubmit} variant="contained">
-          Add
+          {isEdit ? "Update" : "Add"}
         </Button>
       </DialogActions>
     </Dialog>

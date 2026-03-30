@@ -59,7 +59,7 @@ npm install @tanstack/react-query
 #### UI & Styling
 
 ```bash
-npm install @mui/material @emotion/react @emotion/styled
+npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```

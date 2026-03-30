@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 
+import uiSlice from "../features/ui/uiSlice";
+
 export const store = configureStore({
   reducer: {
-    // @ToDo Adding new features
+    [uiSlice.name]: uiSlice.reducer
   },
 });

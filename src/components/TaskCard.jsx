@@ -9,6 +9,7 @@ import {
 import { PRIORITIES } from "../constants/priorities";
 import { useDeleteTask } from "../services/tasksQueries";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import { openEditDialog } from "../features/ui/uiSlice";
 import { useDispatch } from "react-redux";
 import { useDraggable } from "@dnd-kit/core";
@@ -45,12 +46,10 @@ export default function TaskCard({ task }) {
         borderRadius: 2,
         cursor: "pointer",
         position: "relative",
-        "&:hover .delete-btn": {
+        "&:hover .delete-btn, &:hover .edit-btn": {
           opacity: 1,
         },
       }}
-      onClick={() => dispatch(openEditDialog(task))}
-      onMouseDown={(e) => e.stopPropagation()}
       className="shrink-0"
     >
       <CardContent>
@@ -59,21 +58,38 @@ export default function TaskCard({ task }) {
             {task.title}
           </Typography>
 
-          {/* Delete button (hidden by default) */}
-          <IconButton
-            className="delete-btn"
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation(); // prevent opening edit
-              deleteTask(task.id);
-            }}
-            sx={{
-              opacity: 0,
-              transition: "0.2s",
-            }}
-          >
-            <DeleteIcon fontSize="small" />
-          </IconButton>
+          <Box>
+            {/* Edit button (hidden by default) */}
+            <IconButton
+              className="edit-btn"
+              size="small"
+              onMouseDown={(e) => {
+                e.stopPropagation(); // prevent opening edit
+                dispatch(openEditDialog(task));
+              }}
+              sx={{
+                opacity: 0,
+                transition: "0.2s",
+              }}
+            >
+              <EditIcon fontSize="small" />
+            </IconButton>
+            {/* Delete button (hidden by default) */}
+            <IconButton
+              className="delete-btn"
+              size="small"
+              onMouseDown={(e) => {
+                e.stopPropagation(); // prevent opening edit
+                deleteTask(task.id);
+              }}
+              sx={{
+                opacity: 0,
+                transition: "0.2s",
+              }}
+            >
+              <DeleteIcon fontSize="small" />
+            </IconButton>
+          </Box>
         </Box>
 
         <Typography className="block" variant="caption" color="text.secondary">

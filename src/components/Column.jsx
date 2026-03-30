@@ -6,10 +6,11 @@ import { openCreateDialog } from "../features/ui/uiSlice";
 import { useDroppable } from "@dnd-kit/core";
 
 export default function Column({ column }) {
-  const { setNodeRef } = useDroppable({
+  const { setNodeRef, active } = useDroppable({
     id: column.key,
   });
 
+  const isDragging = Boolean(active);
   const search = useSelector((state) => state.ui.search);
 
   const { data: tasks = [] } = useTasks();
@@ -52,7 +53,9 @@ export default function Column({ column }) {
       </Box>
 
       {/* Tasks */}
-      <Box className="flex flex-col gap-3 overflow-y-auto">
+      <Box
+        className={`flex flex-col gap-3 ${isDragging ? "overflow-y-clip" : "overflow-y-auto"} max-h-[calc(100%-95px)] custom-scrollbar`}
+      >
         {filteredTasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}

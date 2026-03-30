@@ -94,6 +94,26 @@ Update `src/index.css`:
 @tailwind utilities;
 ```
 
+### 4. Mock API Setup (json-server)
+
+This project uses json-server to simulate a backend API for tasks.
+
+* npm install -g json-server
+* Create db.json in project root
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Design homepage",
+      "description": "Include hero section",
+      "column": "backlog",
+      "priority": "high"
+    }
+  ]
+}
+* json-server --watch db.json --port 4000
+* API Endpoint: http://localhost:4000/tasks
+
 ---
 
 ### 4. Run the project
@@ -131,7 +151,7 @@ src/
 
 ## Features
 
-* [ ] @ToDo Display tasks in 4 columns
+* [ ] Display tasks in 4 columns
 * [ ] @ToDo Create task
 * [ ] @ToDo Edit task
 * [ ] @ToDo Delete task
@@ -155,6 +175,17 @@ Base Colors:
 | :--- | :--- | :--- |
 | **App Background** | `bg-gray-100/80` | Main page background |
 | **Column Background** | `bg-[#ebf0f0]` | Column in Board background |
+
+---
+
+## Architecture Overview
+API (json-server)
+      ↓
+React Query (server state)
+      ↓
+Components
+      ↑
+Redux (UI state) [ToDo]
 
 ---
 

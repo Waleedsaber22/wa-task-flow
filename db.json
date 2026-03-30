@@ -4,8 +4,7 @@
       "id": "1",
       "title": "Design homepage",
       "description": "Include hero section",
-      "column": "backlog",
-      "priority": "high"
+      "column": "backlog"
     }
   ]
 }

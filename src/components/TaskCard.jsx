@@ -1,28 +1,32 @@
 import { Card, CardContent, Typography, Chip } from "@mui/material";
+import { PRIORITIES } from "../constants/priorities";
 
-export default function TaskCard() {
+export default function TaskCard({ task }) {
+  const priority = PRIORITIES[task.priority];
+
   return (
     <Card variant="outlined" sx={{ borderRadius: 2 }}>
       <CardContent>
-        <Typography variant="subtitle2" fontWeight="600" gutterBottom>
-          Sample Task Title
+        <Typography variant="subtitle2" fontWeight={600} gutterBottom>
+          {task.title}
         </Typography>
 
-        <Typography variant="caption" color="text.secondary">
-          This is a short task description to match the UI.
+        <Typography className="block" variant="caption" color="text.secondary">
+          {task.description}
         </Typography>
 
-        {/* Priority */}
-        <Chip
-          label="HIGH"
-          size="small"
-          sx={{
-            mt: 1,
-            backgroundColor: "#fee2e2",
-            color: "#dc2626",
-            fontWeight: 600,
-          }}
-        />
+
+        {priority && (
+          <Chip
+            label={priority.label}
+            size="small"
+            className={`!rounded ${priority.color} ${priority.bg}`}
+            sx={{
+              mt: 1,
+              fontWeight: 600,
+            }}
+          />
+        )}
       </CardContent>
     </Card>
   );

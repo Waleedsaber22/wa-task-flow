@@ -1,7 +1,11 @@
 import { Box, Typography, Button } from "@mui/material";
 import TaskCard from "./TaskCard";
+import { useTasks } from "../services/tasksQueries";
 
 export default function Column({ column }) {
+  const { data: tasks = [] } = useTasks();
+  const filteredTasks = tasks.filter((t) => t.column === column.key);
+  
   return (
     <Box
       className="flex flex-col min-w-[350px] max-w-[350px] h-[calc(100vh-120px)]"
@@ -27,14 +31,15 @@ export default function Column({ column }) {
         </Typography>
 
         <Box className="w-6 h-6 flex items-center justify-center bg-gray-200 rounded-full">
-          <Typography variant="caption">0</Typography>
+          <Typography variant="caption">{tasks.length}</Typography>
         </Box>
       </Box>
 
       {/* Tasks */}
       <Box className="flex flex-col gap-3 overflow-y-auto">
-        <TaskCard />
-        <TaskCard />
+        {filteredTasks.map((task) => (
+          <TaskCard key={task.id} task={task} />
+        ))}
       </Box>
 
       {/* Add Task */}

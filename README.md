@@ -2,6 +2,20 @@
 
 A modern Kanban-style ToDo dashboard built with React, Redux, React Query, Tailwind CSS, and Material UI.
 
+## Live Demo
+
+👉 https://wa-task-flow.netlify.app
+
+Note: The mock server may take a few seconds to start, so tasks might load with a slight delay on first visit.
+
+---
+
+## Project Management
+
+Tasks and progress are managed using Trello:
+
+👉 https://trello.com/invite/b/69c97a3f53219a4d0b3731cd/ATTI9366e883613b0a1ebc9678510426d0feC305D5A6/task-flow
+
 ---
 
 ## Overview
@@ -22,8 +36,8 @@ The application provides a clean and interactive Kanban board with drag-and-drop
 ### Core
 
 - React
-- Redux Toolkit (State Management)
-- React Query (Data Fetching & Caching)
+- Redux Toolkit (UI State Management)
+- React Query (Server State & Caching)
 
 ### UI / Styling
 
@@ -38,10 +52,10 @@ The application provides a clean and interactive Kanban board with drag-and-drop
 
 ## Project Setup
 
-### 1. Create the project
+### 1. Clone repository
 
 ```bash
-npx create-react-app task_flow
+git clone https://github.com/Waleedsaber22/wa-task-flow.git
 cd task_flow
 ```
 
@@ -49,68 +63,15 @@ cd task_flow
 
 ### 2. Install dependencies
 
-#### Core dependencies
-
 ```bash
-npm install @reduxjs/toolkit react-redux
-npm install @tanstack/react-query
+npm install
 ```
 
-#### UI & Styling
-
-```bash
-npm install @mui/material @mui/icons-material @emotion/react @emotion/styled
-npm install -D tailwindcss postcss autoprefixer
-npx tailwindcss init -p
-```
-
-#### Drag & Drop
-
-```bash
-npm install @dnd-kit/core
-```
-
----
-
-### 3. Setup Tailwind CSS
-
-Update `tailwind.config.js`:
-
-```js
-module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-```
-
-Update `src/index.css`:
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-
-### 4. Mock API Setup (json-server)
+### 3. Run Mock API (json-server)
 
 This project uses json-server to simulate a backend API for tasks.
 
 - npm install -g json-server
-- Create db.json in project root
-  {
-  "tasks": [
-  {
-  "id": "1",
-  "title": "Design homepage",
-  "description": "Include hero section",
-  "column": "backlog",
-  "priority": "high"
-  }
-  ]
-  }
 - json-server --watch db.json --port 4000
 - API Endpoint: http://localhost:4000/tasks
 
@@ -130,6 +91,20 @@ http://localhost:3000
 
 ---
 
+## Features
+
+- [-] Display tasks in 4 columns
+- [-] Create task
+- [-] Edit task
+- [-] Delete task
+- [-] Drag & drop between columns
+- [-] Pagination / infinite scroll
+- [-] Search tasks
+- [-] State management using Redux
+- [-] Data caching using React Query
+
+---
+
 ## Project Structure
 
 ```
@@ -146,20 +121,6 @@ src/
 ├── utils/              # Helper functions
 └── App.js
 ```
-
----
-
-## Features
-
-- [ ] Display tasks in 4 columns
-- [ ] Create task
-- [ ] Edit task
-- [ ] Delete task
-- [ ] Drag & drop between columns
-- [ ] Pagination / infinite scroll
-- [ ] Search tasks
-- [ ] State management using Redux
-- [ ] Data caching using React Query
 
 ---
 
@@ -186,12 +147,4 @@ React Query (server state)
 ↓
 Components
 ↑
-Redux (UI state) [ToDo]
-
----
-
-## Project Management
-
-Tasks and progress are managed using Trello:
-
-👉 https://trello.com/invite/b/69c97a3f53219a4d0b3731cd/ATTI9366e883613b0a1ebc9678510426d0feC305D5A6/task-flow
+Redux (UI state)

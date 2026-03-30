@@ -2,9 +2,11 @@ import { Box, TextField, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { setSearch } from "../features/ui/uiSlice";
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useTasksCount } from "../services/tasksQueries";
 
 export default function AppLayout({ children }) {
   const dispatch = useDispatch();
+  const { data: taskCount } = useTasksCount();
   return (
     <div className="min-h-screen bg-gray-100/80">
       <Box className="flex items-center justify-between px-6 py-3 border-b">
@@ -33,7 +35,7 @@ export default function AppLayout({ children }) {
               KANBAN BOARD
             </Typography>
             <Typography variant="caption" color="text.secondary">
-              10 tasks
+              {taskCount} tasks
             </Typography>
           </Box>
         </Box>

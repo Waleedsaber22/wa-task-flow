@@ -23,7 +23,6 @@ export default function Column({ column }) {
     hasNextPage,
     fetchNextPage,
   });
-
   const tasks = data?.pages.map(({ data }) => data).flat();
   const filteredTasks = tasks.filter(
     (t) =>

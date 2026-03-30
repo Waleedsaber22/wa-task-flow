@@ -4,9 +4,17 @@ import {
   createTaskApi,
   updateTaskApi,
   deleteTaskApi,
+  fetchTasksCount,
 } from "./tasksApi";
 
 import { useInfiniteQuery } from "@tanstack/react-query";
+
+export const useTasks = () => {
+  return useQuery({
+    queryKey: ["tasks"],
+    queryFn: fetchTasks,
+  });
+};
 
 export const useTasksByColumn = (column) => {
   return useInfiniteQuery({
@@ -19,10 +27,10 @@ export const useTasksByColumn = (column) => {
   });
 };
 
-export const useTasks = () => {
+export const useTasksCount = () => {
   return useQuery({
-    queryKey: ["tasks"],
-    queryFn: fetchTasks,
+    queryKey: ["tasks-count"],
+    queryFn: fetchTasksCount,
   });
 };
 
@@ -32,7 +40,7 @@ export const useAddTask = () => {
   return useMutation({
     mutationFn: createTaskApi,
     onSuccess: () => {
-      queryClient.invalidateQueries(["tasks"]);
+      queryClient.invalidateQueries(["tasks", "tasks-count"]);
     },
   });
 };
@@ -54,7 +62,7 @@ export const useDeleteTask = () => {
   return useMutation({
     mutationFn: deleteTaskApi,
     onSuccess: () => {
-      queryClient.invalidateQueries(["tasks"]);
+      queryClient.invalidateQueries(["tasks", "tasks-count"]);
     },
   });
 };

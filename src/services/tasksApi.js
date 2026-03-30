@@ -2,8 +2,10 @@ import axios from "axios";
 
 const API_URL = "http://localhost:4000/tasks";
 
-export const fetchTasks = async () => {
-  const { data } = await axios.get(API_URL);
+export const fetchTasks = async ({ pageParam = 1, column }) => {
+  const { data } = await axios.get(
+    `${API_URL}?column=${column}&_page=${pageParam}&_per_page=10&_sort=order`
+  );
   return data;
 };
 

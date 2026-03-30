@@ -8,10 +8,10 @@ A modern Kanban-style ToDo dashboard built with React, Redux, React Query, Tailw
 
 Task Flow is a task management application that helps users organize their work across four stages:
 
-* Backlog
-* In Progress
-* Review
-* Done
+- Backlog
+- In Progress
+- Review
+- Done
 
 The application provides a clean and interactive Kanban board with drag-and-drop functionality, task management, and optimized performance using caching.
 
@@ -21,18 +21,18 @@ The application provides a clean and interactive Kanban board with drag-and-drop
 
 ### Core
 
-* React
-* Redux Toolkit (State Management)
-* React Query (Data Fetching & Caching)
+- React
+- Redux Toolkit (State Management)
+- React Query (Data Fetching & Caching)
 
 ### UI / Styling
 
-* Tailwind CSS (Utility-first styling)
-* Material UI (Component library)
+- Tailwind CSS (Utility-first styling)
+- Material UI (Component library)
 
 ### Additional [Drag Functionality]
 
-* DnD Kit (Drag & Drop)
+- DnD Kit (Drag & Drop)
 
 ---
 
@@ -98,21 +98,21 @@ Update `src/index.css`:
 
 This project uses json-server to simulate a backend API for tasks.
 
-* npm install -g json-server
-* Create db.json in project root
-{
+- npm install -g json-server
+- Create db.json in project root
+  {
   "tasks": [
-    {
-      "id": "1",
-      "title": "Design homepage",
-      "description": "Include hero section",
-      "column": "backlog",
-      "priority": "high"
-    }
+  {
+  "id": "1",
+  "title": "Design homepage",
+  "description": "Include hero section",
+  "column": "backlog",
+  "priority": "high"
+  }
   ]
-}
-* json-server --watch db.json --port 4000
-* API Endpoint: http://localhost:4000/tasks
+  }
+- json-server --watch db.json --port 4000
+- API Endpoint: http://localhost:4000/tasks
 
 ---
 
@@ -151,15 +151,15 @@ src/
 
 ## Features
 
-* [ ] Display tasks in 4 columns
-* [ ] Create task
-* [ ] Edit task
-* [ ] Delete task
-* [ ] Drag & drop between columns
-* [ ] @ToDo Pagination / infinite scroll
-* [ ] Search tasks
-* [ ] State management using Redux
-* [ ] Data caching using React Query
+- [ ] Display tasks in 4 columns
+- [ ] Create task
+- [ ] Edit task
+- [ ] Delete task
+- [ ] Drag & drop between columns
+- [ ] Pagination / infinite scroll
+- [ ] Search tasks
+- [ ] State management using Redux
+- [ ] Data caching using React Query
 
 ---
 
@@ -171,20 +171,21 @@ These colors are implemented using Tailwind CSS utility classes and aligned with
 
 Base Colors:
 
-| Purpose | Tailwind Class | Description |
-| :--- | :--- | :--- |
-| **App Background** | `bg-gray-100/80` | Main page background |
-| **Column Background** | `bg-[#ebf0f0]` | Column in Board background |
+| Purpose               | Tailwind Class   | Description                |
+| :-------------------- | :--------------- | :------------------------- |
+| **App Background**    | `bg-gray-100/80` | Main page background       |
+| **Column Background** | `bg-[#ebf0f0]`   | Column in Board background |
 
 ---
 
 ## Architecture Overview
+
 API (json-server)
-      ↓
+↓
 React Query (server state)
-      ↓
+↓
 Components
-      ↑
+↑
 Redux (UI state) [ToDo]
 
 ---

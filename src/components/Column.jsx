@@ -1,9 +1,10 @@
 import { Box, Typography, Button } from "@mui/material";
 import TaskCard from "./TaskCard";
-import { useTasks } from "../services/tasksQueries";
+import { useTasksByColumn } from "../services/tasksQueries";
 import { useDispatch, useSelector } from "react-redux";
 import { openCreateDialog } from "../features/ui/uiSlice";
 import { useDroppable } from "@dnd-kit/core";
+import useInfiniteScroll from "../hooks/useInfiniteScroll";
 
 export default function Column({ column }) {
   const { setNodeRef, active } = useDroppable({
@@ -13,7 +14,17 @@ export default function Column({ column }) {
   const isDragging = Boolean(active);
   const search = useSelector((state) => state.ui.search);
 
-  const { data: tasks = [] } = useTasks();
+  const {
+    data = { pages: [] },
+    hasNextPage,
+    fetchNextPage,
+  } = useTasksByColumn(column.key);
+  const containerRef = useInfiniteScroll({
+    hasNextPage,
+    fetchNextPage,
+  });
+
+  const tasks = data?.pages.map(({ data }) => data).flat();
   const filteredTasks = tasks.filter(
     (t) =>
       t.column === column.key &&
@@ -54,6 +65,7 @@ export default function Column({ column }) {
 
       {/* Tasks */}
       <Box
+        ref={containerRef}
         className={`flex flex-col gap-3 ${isDragging ? "overflow-y-clip" : "overflow-y-auto"} max-h-[calc(100%-95px)] custom-scrollbar`}
       >
         {filteredTasks.map((task) => (

@@ -6,6 +6,19 @@ import {
   deleteTaskApi,
 } from "./tasksApi";
 
+import { useInfiniteQuery } from "@tanstack/react-query";
+
+export const useTasksByColumn = (column) => {
+  return useInfiniteQuery({
+    queryKey: ["tasks", column],
+    queryFn: ({ pageParam = 1 }) => fetchTasks({ pageParam, column }),
+    getNextPageParam: (lastPage, pages) => {
+      if (!lastPage.next) return undefined;
+      return pages.length + 1;
+    },
+  });
+};
+
 export const useTasks = () => {
   return useQuery({
     queryKey: ["tasks"],

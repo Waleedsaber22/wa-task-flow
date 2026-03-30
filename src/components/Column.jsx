@@ -1,12 +1,16 @@
 import { Box, Typography, Button } from "@mui/material";
 import TaskCard from "./TaskCard";
 import { useTasks } from "../services/tasksQueries";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { openCreateDialog } from "../features/ui/uiSlice";
 
 export default function Column({ column }) {
+  const search = useSelector((state) => state.ui.search);
+
   const { data: tasks = [] } = useTasks();
-  const filteredTasks = tasks.filter((t) => t.column === column.key);
+  const filteredTasks = tasks.filter((t) => t.column === column.key &&
+    (t.title.toLowerCase().includes(search.toLowerCase()) ||
+      t.description.toLowerCase().includes(search.toLowerCase())));
   const dispatch = useDispatch();
 
   return (

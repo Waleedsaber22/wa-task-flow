@@ -1,6 +1,9 @@
 import { TextField } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { setSearch } from "../features/ui/uiSlice";
 
 export default function AppLayout({ children }) {
+  const dispatch=useDispatch()
   return (
     <div className="min-h-screen bg-gray-100/80">
       
@@ -23,6 +26,7 @@ export default function AppLayout({ children }) {
             className="bg-gray-200"
             placeholder="Search tasks..."
             variant="outlined"
+            onChange={(e) => dispatch(setSearch(e.target.value))}
           />
         </div>
 

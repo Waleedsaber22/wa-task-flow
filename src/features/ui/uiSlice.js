@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+  search: "",
   isTaskDialogOpen: false,
   task: null,
   column: null,
@@ -10,6 +11,10 @@ const uiSlice = createSlice({
   name: "ui",
   initialState,
   reducers: {
+    setSearch: (state, action) => {
+      state.search = action.payload;
+    },
+
     openCreateDialog: (state, action) => {
       state.isTaskDialogOpen = true;
       state.task = null;
@@ -31,6 +36,7 @@ const uiSlice = createSlice({
 });
 
 export const {
+  setSearch,
   openCreateDialog,
   openEditDialog,
   closeTaskDialog,

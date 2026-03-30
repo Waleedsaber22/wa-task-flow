@@ -36,7 +36,7 @@ export default function Column({ column }) {
   return (
     <Box
       ref={setNodeRef}
-      className="flex flex-col min-w-[350px] max-w-[350px] h-[calc(100vh-120px)]"
+      className="flex flex-col min-w-[350px] max-w-[350px] h-[calc(100vh-115px)]"
       sx={{
         backgroundColor: "#ebf0f0",
         borderRadius: 2,
@@ -47,19 +47,23 @@ export default function Column({ column }) {
       <Box className="flex items-center gap-2 mb-4">
         <Box
           sx={{
-            width: 8,
-            height: 8,
+            width: 10,
+            height: 10,
             borderRadius: "50%",
           }}
           className={column.color}
         />
 
-        <Typography variant="subtitle2" fontWeight="bold">
+        <Typography
+          className="text-gray-600 !font-inter"
+          variant="subtitle2"
+          fontWeight="bold"
+        >
           {column.title}
         </Typography>
 
         <Box className="w-6 h-6 flex items-center justify-center bg-gray-200 rounded-full">
-          <Typography variant="caption">{tasks.length}</Typography>
+          <Typography variant="caption">{filteredTasks.length}</Typography>
         </Box>
       </Box>
 

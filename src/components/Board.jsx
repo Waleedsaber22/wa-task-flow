@@ -24,7 +24,7 @@ export default function Board() {
   };
   return (
     <DndContext onDragEnd={handleDragEnd}>
-      <Box className="flex gap-4 overflow-x-auto pb-2">
+      <Box className="flex gap-4 overflow-x-auto">
         {COLUMNS.map((col) => (
           <Column key={col.key} column={col} />
         ))}

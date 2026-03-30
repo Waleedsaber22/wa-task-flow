@@ -54,7 +54,12 @@ export default function TaskCard({ task }) {
     >
       <CardContent>
         <Box className="flex justify-between items-start">
-          <Typography variant="subtitle2" fontWeight={600} gutterBottom>
+          <Typography
+            className="text-gray-800"
+            variant="subtitle2"
+            fontWeight={600}
+            gutterBottom
+          >
             {task.title}
           </Typography>
 
@@ -83,7 +88,9 @@ export default function TaskCard({ task }) {
                 deleteTask(task.id);
               }}
               sx={{
+                marginLeft: "7px",
                 opacity: 0,
+                color: "red",
                 transition: "0.2s",
               }}
             >

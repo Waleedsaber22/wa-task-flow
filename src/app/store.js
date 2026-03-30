@@ -4,6 +4,6 @@ import uiSlice from "../features/ui/uiSlice";
 
 export const store = configureStore({
   reducer: {
-    [uiSlice.name]: uiSlice.reducer
+    [uiSlice.name]: uiSlice.reducer,
   },
 });

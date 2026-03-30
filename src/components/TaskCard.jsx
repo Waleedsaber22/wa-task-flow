@@ -1,8 +1,13 @@
-import { Card, CardContent, Typography, Chip, IconButton, Box } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  Typography,
+  Chip,
+  IconButton,
+  Box,
+} from "@mui/material";
 import { PRIORITIES } from "../constants/priorities";
 import { useDeleteTask } from "../services/tasksQueries";
-import { useState } from "react";
-import TaskDialog from "./TaskDialog";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { openEditDialog } from "../features/ui/uiSlice";
 import { useDispatch } from "react-redux";
@@ -19,8 +24,8 @@ export default function TaskCard({ task }) {
     zIndex: isDragging ? 1000 : "auto",
     ...(transform
       ? {
-        transform: `translate(${transform.x}px, ${transform.y}px)`,
-      }
+          transform: `translate(${transform.x}px, ${transform.y}px)`,
+        }
       : {}),
   };
 
@@ -35,7 +40,8 @@ export default function TaskCard({ task }) {
       {...listeners}
       {...attributes}
       style={style}
-      variant="outlined" sx={{
+      variant="outlined"
+      sx={{
         borderRadius: 2,
         cursor: "pointer",
         position: "relative",
@@ -73,7 +79,6 @@ export default function TaskCard({ task }) {
         <Typography className="block" variant="caption" color="text.secondary">
           {task.description}
         </Typography>
-
 
         {priority && (
           <Chip

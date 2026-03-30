@@ -7,15 +7,18 @@ import { useDroppable } from "@dnd-kit/core";
 
 export default function Column({ column }) {
   const { setNodeRef } = useDroppable({
-  id: column.key,
-});
+    id: column.key,
+  });
 
   const search = useSelector((state) => state.ui.search);
 
   const { data: tasks = [] } = useTasks();
-  const filteredTasks = tasks.filter((t) => t.column === column.key &&
-    (t.title.toLowerCase().includes(search.toLowerCase()) ||
-      t.description.toLowerCase().includes(search.toLowerCase())));
+  const filteredTasks = tasks.filter(
+    (t) =>
+      t.column === column.key &&
+      (t.title.toLowerCase().includes(search.toLowerCase()) ||
+        t.description.toLowerCase().includes(search.toLowerCase()))
+  );
   const dispatch = useDispatch();
 
   return (
@@ -68,7 +71,6 @@ export default function Column({ column }) {
       >
         + Add task
       </Button>
-
     </Box>
   );
 }

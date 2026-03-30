@@ -5,9 +5,9 @@ import { useUpdateTask } from "../services/tasksQueries";
 import { DndContext } from "@dnd-kit/core";
 
 export default function Board() {
-    const {mutate: updateTask}= useUpdateTask()
+  const { mutate: updateTask } = useUpdateTask();
 
-    const handleDragEnd = (event) => {
+  const handleDragEnd = (event) => {
     const { active, over } = event;
 
     if (!over) return;

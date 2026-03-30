@@ -3,18 +3,14 @@ import { useDispatch } from "react-redux";
 import { setSearch } from "../features/ui/uiSlice";
 
 export default function AppLayout({ children }) {
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   return (
     <div className="min-h-screen bg-gray-100/80">
-      
       {/* Header */}
       <header className="flex items-center justify-between px-6 py-4 border-b">
-        
         {/* Left: Title */}
         <div>
-          <h1 className="text-lg font-bold tracking-wide">
-            KANBAN BOARD
-          </h1>
+          <h1 className="text-lg font-bold tracking-wide">KANBAN BOARD</h1>
           <p className="text-sm text-gray-500">0 tasks</p>
         </div>
 
@@ -29,7 +25,6 @@ export default function AppLayout({ children }) {
             onChange={(e) => dispatch(setSearch(e.target.value))}
           />
         </div>
-
       </header>
 
       {/* Main Content */}

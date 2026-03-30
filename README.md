@@ -67,7 +67,7 @@ npx tailwindcss init -p
 #### Drag & Drop
 
 ```bash
-npm install @dnd-kit/core @dnd-kit/sortable
+npm install @dnd-kit/core
 ```
 
 ---
@@ -152,14 +152,14 @@ src/
 ## Features
 
 * [ ] Display tasks in 4 columns
-* [ ] @ToDo Create task
-* [ ] @ToDo Edit task
-* [ ] @ToDo Delete task
-* [ ] @ToDo Drag & drop between columns
+* [ ] Create task
+* [ ] Edit task
+* [ ] Delete task
+* [ ] Drag & drop between columns
 * [ ] @ToDo Pagination / infinite scroll
-* [ ] @ToDo Search tasks
-* [ ] @ToDo State management using Redux
-* [ ] @ToDo Data caching using React Query
+* [ ] Search tasks
+* [ ] State management using Redux
+* [ ] Data caching using React Query
 
 ---
 

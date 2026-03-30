@@ -12,15 +12,13 @@ import { PRIORITIES } from "../constants/priorities";
 import { useAddTask, useUpdateTask } from "../services/tasksQueries";
 import { useDispatch, useSelector } from "react-redux";
 import { closeTaskDialog } from "../features/ui/uiSlice";
- 
+
 export default function TaskDialog() {
   const dispatch = useDispatch();
-  const { isTaskDialogOpen, task, column } = useSelector(
-    (state) => state.ui
-  );
+  const { isTaskDialogOpen, task, column } = useSelector((state) => state.ui);
 
   const isEdit = Boolean(task);
-  
+
   const { mutate: addTask } = useAddTask();
   const { mutate: updateTask } = useUpdateTask();
 
@@ -28,7 +26,7 @@ export default function TaskDialog() {
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("medium");
 
-    useEffect(() => {
+  useEffect(() => {
     if (task) {
       setTitle(task.title);
       setDescription(task.description);
@@ -52,19 +50,22 @@ export default function TaskDialog() {
       });
     } else {
       addTask({
-          title,
-          description,
-          column,
-          priority,
-        }
-      );
+        title,
+        description,
+        column,
+        priority,
+      });
     }
 
     dispatch(closeTaskDialog());
   };
 
   return (
-    <Dialog open={isTaskDialogOpen} onClose={() => dispatch(closeTaskDialog())} fullWidth>
+    <Dialog
+      open={isTaskDialogOpen}
+      onClose={() => dispatch(closeTaskDialog())}
+      fullWidth
+    >
       <DialogTitle>Add Task</DialogTitle>
 
       <DialogContent>

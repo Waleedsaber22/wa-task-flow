@@ -35,11 +35,7 @@ const uiSlice = createSlice({
   },
 });
 
-export const {
-  setSearch,
-  openCreateDialog,
-  openEditDialog,
-  closeTaskDialog,
-} = uiSlice.actions;
+export const { setSearch, openCreateDialog, openEditDialog, closeTaskDialog } =
+  uiSlice.actions;
 
 export default uiSlice;

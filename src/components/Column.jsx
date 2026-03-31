@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { openCreateDialog } from "../features/ui/uiSlice";
 import { useDroppable } from "@dnd-kit/core";
 import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import TaskCardSkeleton from "./TaskSkeletonCard";
 
 export default function Column({ column }) {
   const { setNodeRef, active } = useDroppable({
@@ -18,6 +19,7 @@ export default function Column({ column }) {
     data = { pages: [] },
     hasNextPage,
     fetchNextPage,
+    isLoading,
   } = useTasksByColumn(column.key);
   const containerRef = useInfiniteScroll({
     hasNextPage,
@@ -71,6 +73,10 @@ export default function Column({ column }) {
         ref={containerRef}
         className={`flex flex-col gap-3 ${isDragging ? "overflow-y-clip" : "overflow-y-auto"} max-h-[calc(100%-95px)] custom-scrollbar`}
       >
+        {/* First load skeleton */}
+        {isLoading &&
+          tasks.length === 0 &&
+          Array.from({ length: 3 }).map((_, i) => <TaskCardSkeleton key={i} />)}
         {filteredTasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}

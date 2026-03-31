@@ -33,7 +33,7 @@ export default function TaskCard({ task }) {
   const dispatch = useDispatch();
 
   const priority = PRIORITIES[task.priority];
-  const { mutate: deleteTask } = useDeleteTask();
+  const { mutate: deleteTask } = useDeleteTask(task);
 
   return (
     <Card
@@ -68,8 +68,8 @@ export default function TaskCard({ task }) {
             <IconButton
               className="edit-btn"
               size="small"
-              onMouseDown={(e) => {
-                e.stopPropagation(); // prevent opening edit
+              onPointerDown={(e) => {
+                e.stopPropagation();
                 dispatch(openEditDialog(task));
               }}
               sx={{
@@ -83,8 +83,8 @@ export default function TaskCard({ task }) {
             <IconButton
               className="delete-btn"
               size="small"
-              onMouseDown={(e) => {
-                e.stopPropagation(); // prevent opening edit
+              onPointerDown={(e) => {
+                e.stopPropagation();
                 deleteTask(task.id);
               }}
               sx={{

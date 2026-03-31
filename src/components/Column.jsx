@@ -20,18 +20,14 @@ export default function Column({ column }) {
     hasNextPage,
     fetchNextPage,
     isLoading,
-  } = useTasksByColumn(column.key);
+  } = useTasksByColumn(column.key, search);
+
   const containerRef = useInfiniteScroll({
     hasNextPage,
     fetchNextPage,
   });
   const tasks = data?.pages.map(({ data }) => data).flat();
-  const filteredTasks = tasks.filter(
-    (t) =>
-      t.column === column.key &&
-      (t.title.toLowerCase().includes(search.toLowerCase()) ||
-        t.description.toLowerCase().includes(search.toLowerCase()))
-  );
+
   const dispatch = useDispatch();
 
   return (
@@ -64,7 +60,9 @@ export default function Column({ column }) {
         </Typography>
 
         <Box className="w-6 h-6 flex items-center justify-center bg-gray-200 rounded-full">
-          <Typography variant="caption">{filteredTasks.length}</Typography>
+          <Typography variant="caption">
+            {data?.pages[0]?.items || 0}
+          </Typography>
         </Box>
       </Box>
 
@@ -77,7 +75,7 @@ export default function Column({ column }) {
         {isLoading &&
           tasks.length === 0 &&
           Array.from({ length: 3 }).map((_, i) => <TaskCardSkeleton key={i} />)}
-        {filteredTasks.map((task) => (
+        {tasks.map((task) => (
           <TaskCard key={task.id} task={task} />
         ))}
       </Box>

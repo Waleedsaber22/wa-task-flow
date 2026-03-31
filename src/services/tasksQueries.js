@@ -16,14 +16,15 @@ export const useTasks = () => {
   });
 };
 
-export const useTasksByColumn = (column) => {
+export const useTasksByColumn = (column, search) => {
   return useInfiniteQuery({
-    queryKey: ["tasks", column],
-    queryFn: ({ pageParam = 1 }) => fetchTasks({ pageParam, column }),
+    queryKey: [`tasks`, column, search],
+    queryFn: ({ pageParam = 1 }) => fetchTasks({ pageParam, column, search }),
     getNextPageParam: (lastPage, pages) => {
       if (!lastPage.next) return undefined;
       return pages.length + 1;
     },
+    placeholderData: (data) => data,
   });
 };
 
@@ -39,8 +40,16 @@ export const useAddTask = () => {
 
   return useMutation({
     mutationFn: createTaskApi,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["tasks", "tasks-count"]);
+    onSuccess: (task) => {
+      // invalidate only that column
+      queryClient.invalidateQueries({
+        queryKey: ["tasks", task.column],
+      });
+
+      // invalidate total count
+      queryClient.invalidateQueries({
+        queryKey: ["tasks-count"],
+      });
     },
   });
 };
@@ -50,19 +59,35 @@ export const useUpdateTask = () => {
 
   return useMutation({
     mutationFn: updateTaskApi,
-    onSuccess: () => {
-      queryClient.invalidateQueries(["tasks"]);
+    onSuccess: (_, variables) => {
+      if (variables.isUpdating) {
+        queryClient.invalidateQueries({
+          queryKey: ["tasks", variables.column],
+        });
+      } else {
+        queryClient.invalidateQueries({
+          queryKey: ["tasks"],
+        });
+      }
     },
   });
 };
 
-export const useDeleteTask = () => {
+export const useDeleteTask = (deletedTask) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: deleteTaskApi,
     onSuccess: () => {
-      queryClient.invalidateQueries(["tasks", "tasks-count"]);
+      // invalidate only that column
+      queryClient.invalidateQueries({
+        queryKey: ["tasks", deletedTask.column],
+      });
+
+      // invalidate total count
+      queryClient.invalidateQueries({
+        queryKey: ["tasks-count"],
+      });
     },
   });
 };

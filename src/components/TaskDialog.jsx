@@ -47,6 +47,7 @@ export default function TaskDialog() {
         title,
         description,
         priority,
+        isUpdating: true,
       });
     } else {
       addTask({
